@@ -10,7 +10,7 @@ const {
   ERROR_NOT_FOUND_USER_MESSAGE,
 } = require('../utils/constants');
 
-const { NODE_ENV, JWT_SECRET } = config;
+const { NODE_ENV, JWT_SECRET, JWT_SECRET_DEV } = config;
 
 // регистрация
 const createUser = (req, res, next) => {
@@ -39,7 +39,7 @@ const login = (req, res, next) => {
     .then((user) => {
       const userData = JSON.parse(JSON.stringify(user)); // копируем объект
       delete userData.password;
-      const jwtSecret = NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret';
+      const jwtSecret = NODE_ENV === 'production' ? JWT_SECRET : JWT_SECRET_DEV;
       const token = jwt.sign({ _id: user._id }, jwtSecret, { expiresIn: '7d' });
       res
         .cookie('jwt', token, {
