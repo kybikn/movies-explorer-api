@@ -20,10 +20,10 @@ mongoose.connect(MONGO_ADDRESS);
 app.use(cors);
 app.use(cookieParser());
 app.use(helmet());
+app.use(requestLogger); // подключаем логгер запросов
 app.use(limiter);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(requestLogger); // подключаем логгер запросов
 app.use(router);
 app.use(errorLogger); // подключаем логгер ошибок
 app.use(errors()); // обработчик ошибок celebrate
