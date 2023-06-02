@@ -6,7 +6,7 @@ const {
   ERROR_UNAUTHORIZED_MESSAGE,
 } = require('../utils/constants');
 
-const { NODE_ENV, JWT_SECRET } = config;
+const { JWT_SECRET } = config;
 
 module.exports = (req, res, next) => {
   const token = req.cookies.jwt;
@@ -15,7 +15,7 @@ module.exports = (req, res, next) => {
     return;
   }
   let payload;
-  const jwtSecret = NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret';
+  const jwtSecret = JWT_SECRET;
   try {
     payload = jwt.verify(token, jwtSecret);
   } catch (err) {
