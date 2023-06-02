@@ -38,16 +38,15 @@ const createMovie = (req, res, next) => {
     nameRU,
     nameEN,
   })
-    .then((movie) => movie.populate('owner'))
-    .then((populatedMovie) => {
-      res.status(CREATED_CODE).send(populatedMovie);
+    .then((movie) => {
+      res.status(CREATED_CODE).send(movie);
     })
     .catch(next);
 };
 
 const getMovies = (req, res, next) => {
-  Movie.find({})
-    .populate('owner')
+  const userId = req.user._id;
+  Movie.find({ owner: userId })
     .then((movie) => {
       res.status(SUCCESS_CODE).send(movie);
     })
