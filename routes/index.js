@@ -13,7 +13,7 @@ router.use(authRouter);
 router.use('/users', auth, usersRouter);
 router.use('/movies', auth, moviesRouter);
 
-router.use((req, res, next) => {
+router.use('*', auth, (req, res, next) => {
   const err = new NotFoundError(ERROR_NOT_FOUND_PAGE_MESSAGE);
   next(err);
 });
