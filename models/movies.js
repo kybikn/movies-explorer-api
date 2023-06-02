@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const {
+  MODEL_LINK_ERROR_MESSAGE,
   urlRegex,
 } = require('../utils/constants');
 
@@ -28,30 +29,24 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: (link) => {
-        urlRegex.test(link);
-      },
-      message: 'Невалидная ссылка',
+      validator: (link) => urlRegex.test(link),
+      message: MODEL_LINK_ERROR_MESSAGE,
     },
   },
   trailerLink: {
     type: String,
     required: true,
     validate: {
-      validator: (link) => {
-        urlRegex.test(link);
-      },
-      message: 'Невалидная ссылка',
+      validator: (link) => urlRegex.test(link),
+      message: MODEL_LINK_ERROR_MESSAGE,
     },
   },
   thumbnail: {
     type: String,
     required: true,
     validate: {
-      validator: (link) => {
-        urlRegex.test(link);
-      },
-      message: 'Невалидная ссылка',
+      validator: (link) => urlRegex.test(link),
+      message: MODEL_LINK_ERROR_MESSAGE,
     },
   },
   owner: {
