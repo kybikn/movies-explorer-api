@@ -1,8 +1,5 @@
 const mongoose = require('mongoose');
-const {
-  MODEL_LINK_ERROR_MESSAGE,
-  urlRegex,
-} = require('../utils/constants');
+const { MODEL_LINK_ERROR_MESSAGE, urlRegex } = require('../utils/constants');
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -57,6 +54,7 @@ const movieSchema = new mongoose.Schema({
   movieId: {
     type: Number,
     required: true,
+    unique: true,
   },
   nameRU: {
     type: String,
