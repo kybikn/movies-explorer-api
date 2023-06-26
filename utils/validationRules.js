@@ -36,7 +36,7 @@ const createMovieRules = {
 
 const deleteMovieRules = {
   params: Joi.object().keys({
-    id: validationRules.id,
+    id: validationRules.movieId,
   }),
 };
 

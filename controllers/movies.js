@@ -52,11 +52,11 @@ const getMovies = (req, res, next) => {
     })
     .catch(next);
 };
-
+// Movie.findOneAndDelete({ movieId: id })
 const deleteMovie = (req, res, next) => {
   const { id } = req.params;
   const userId = req.user._id;
-  Movie.findById(id)
+  Movie.findOne({ movieId: id })
     .then((movie) => {
       if (!movie) {
         throw new NotFoundError(ERROR_NOT_FOUND_MOVIE_MESSAGE);
@@ -64,7 +64,8 @@ const deleteMovie = (req, res, next) => {
       if (movie.owner._id.toString() !== userId) {
         throw new ForbiddenError(ERROR_FORBIDDEN_MESSAGE);
       }
-      movie.deleteOne()
+      movie
+        .deleteOne()
         .then(() => {
           res.status(SUCCESS_CODE).send({ message: SUCCESS_MESSAGE });
         })
@@ -72,6 +73,27 @@ const deleteMovie = (req, res, next) => {
     })
     .catch(next);
 };
+
+// const deleteMovie = (req, res, next) => {
+//   const { id } = req.params;
+//   const userId = req.user._id;
+//   Movie.findById(id)
+//     .then((movie) => {
+//       if (!movie) {
+//         throw new NotFoundError(ERROR_NOT_FOUND_MOVIE_MESSAGE);
+//       }
+//       if (movie.owner._id.toString() !== userId) {
+//         throw new ForbiddenError(ERROR_FORBIDDEN_MESSAGE);
+//       }
+//       movie
+//         .deleteOne()
+//         .then(() => {
+//           res.status(SUCCESS_CODE).send({ message: SUCCESS_MESSAGE });
+//         })
+//         .catch(next);
+//     })
+//     .catch(next);
+// };
 
 module.exports = {
   createMovie,
