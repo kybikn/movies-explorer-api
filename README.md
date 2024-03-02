@@ -1,4 +1,5 @@
-# "Movies Explorer API" 1
+# Веб-приложение **"Movies"** 1
+
 ### Сайт:  [Click here!](https://movies.kybikn.ru/)
 
 
